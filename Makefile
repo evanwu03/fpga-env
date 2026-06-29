@@ -1,7 +1,6 @@
 IMAGE := fpga-dev:latest
 USERNAME := ubuntu
 WORKDIR := /home/fpga-dev
-FPGA_DEV := $(shell realpath $(HOME)/Projects/fpga-dev)
 
 build:
 	docker build -t $(IMAGE) .
