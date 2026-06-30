@@ -4,7 +4,7 @@ FROM ubuntu:24.04
 
 ARG USERNAME=ubuntu
 
-
+ENV UVMHOME=/opt/uvm/1800.2-2020.3.1/src/
 
 SHELL ["/bin/bash", "-c"]
 
