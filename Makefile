@@ -17,7 +17,7 @@ run:
 		-v "$(HOME_DIR)/.local/share/nvim":/home/$(USERNAME)/.local/share/nvim \
 		-v "$(HOME_DIR)/.local/state/nvim":/home/$(USERNAME)/.local/state/nvim \
 		-v "/opt/uvm/1800.2-2020.3.1/src/":/opt/uvm/1800.2-2020.3.1/src:ro \
-		$(IMAGE) bash
+		$(IMAGE)
 
 debug:
 	@echo "Home directory = $(HOME_DIR)"

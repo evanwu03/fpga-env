@@ -4,6 +4,8 @@ FROM ubuntu:24.04
 
 ARG USERNAME=ubuntu
 
+
+
 SHELL ["/bin/bash", "-c"]
 
 
@@ -92,3 +94,8 @@ RUN python3 -m venv /home/$USERNAME/.venv/ \
   && /home/$USERNAME/.venv/bin/pip3 install -U pip \
   && /home/$USERNAME/.venv/bin/pip3 install -r /tmp/requirements.txt
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]
