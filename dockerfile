@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     liblz4-dev z3 \
     ccache mold libjemalloc-dev \
     numactl gtkwave help2man curl sudo \
-    clang libreadline-dev gawk tcl-dev libffi-dev \
+    clang libreadline-dev gawk libffi-dev \
     graphviz xdot pkg-config gperf libgmp-dev \
     gawk lld tcl-dev \
 && rm -rf /var/lib/apt/lists/*
@@ -47,7 +47,7 @@ RUN git clone --depth 1 https://github.com/verilator/verilator /tmp/verilator/ \
 
 
 
-# Install Yosys (Cannot not run Symbiyosys without it)
+# Install Yosys (Cannot run Symbiyosys without it)
 RUN git clone --depth 1 --recurse-submodules --shallow-submodules https://github.com/YosysHQ/yosys.git /tmp/yosys/ \
   && cd /tmp/yosys/ \
   && git submodule update --init --recursive \
