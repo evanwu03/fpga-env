@@ -1,0 +1,55 @@
+
+.git
+.gitignore
+
+# Python
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.env
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# HDL/sim outputs
+sim_build/
+waves/
+*.vcd
+*.fst
+*.ghw
+*.wlf
+transcript
+work/
+logs/
+
+# FPGA tool outputs
+output_files/
+db/
+incremental_db/
+greybox_tmp/
+*.rpt
+*.sof
+*.pof
+*.qw
+*.qpf
+*.qsf.bak
+
+# Build artifacts
+build/
+dist/
+*.o
+*.a
+*.so
+*.d
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local caches
+.cache/
