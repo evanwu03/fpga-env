@@ -1,7 +1,10 @@
 IMAGE := fpga-dev:latest
 USERNAME := ubuntu
-HOME_DIR := $(HOME)
+HOME_DIR := $$HOME
+HOST_UID := $(shell id -u)
+HOST_GID := $(shell id -g)
 
+--user $(HOST_UID):$(HOST_GID)
 
 build:
 	docker build -t $(IMAGE) .
@@ -9,9 +12,14 @@ build:
 run:
 	docker run --rm -it \
 		-w /home/$(USERNAME) \
-		--user 1000:1000 \
-		-v "/$(HOME)/.config/nvim":/home/$(USERNAME)/.config/nvim:ro \
-		-v "/$(HOME)/.local/share/nvim":/home/$(USERNAME)/.local/share/nvim \
-		-v "/$(HOME)/.local/state/nvim":/home/$(USERNAME)/.local/state/nvim \
-		-v "/opt/uvm/1800.2-2020.3.1/src/":/home/$(USERNAME)/opt/uvm:ro \
+		--user $(HOST_UID):$(HOST_GID) \
+		-v "$(HOME_DIR)/.config/nvim":/home/$(USERNAME)/.config/nvim \
+		-v "$(HOME_DIR)/.local/share/nvim":/home/$(USERNAME)/.local/share/nvim \
+		-v "$(HOME_DIR)/.local/state/nvim":/home/$(USERNAME)/.local/state/nvim \
+		-v "/opt/uvm/1800.2-2020.3.1/src/":/opt/uvm/1800.2-2020.3.1/src:ro \
 		$(IMAGE) bash
+
+debug:
+	@echo "Home directory = $(HOME_DIR)"
+	@echo "[HOST_UID:HOST_GID]: $(HOST_UID):$(HOST_GID)"
+	@echo "[USERNAME]: $(USERNAME)"
