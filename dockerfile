@@ -4,7 +4,6 @@ FROM ubuntu:24.04
 
 ARG USERNAME=ubuntu
 
-ENV UVMHOME=/opt/uvm/1800.2-2020.3.1/src/
 
 SHELL ["/bin/bash", "-c"]
 
@@ -96,6 +95,9 @@ RUN python3 -m venv /home/$USERNAME/.venv/ \
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+
+ENV UVMHOME=/opt/uvm/1800.2-2020.3.1/src/
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
