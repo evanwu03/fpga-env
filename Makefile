@@ -17,9 +17,15 @@ run:
 		-v "$(HOME_DIR)/.local/share/nvim":/home/$(USERNAME)/.local/share/nvim \
 		-v "$(HOME_DIR)/.local/state/nvim":/home/$(USERNAME)/.local/state/nvim \
 		-v "/opt/uvm/1800.2-2020.3.1/src/":/opt/uvm/1800.2-2020.3.1/src:ro \
+		-v "$(HOME_DIR)/projects/FPGA_Projects/UVMA_1_2_6/":/home/$(USERNAME)/UVM_1_2_6 \
+		-v "$(HOME_DIR)/OpenLab/":/home/$(USERNAME)/OpenLab \
+		-v "/proj/cad":/proj/cad/:ro \
 		$(IMAGE)
+
+
 
 debug:
 	@echo "Home directory = $(HOME_DIR)"
 	@echo "[HOST_UID:HOST_GID]: $(HOST_UID):$(HOST_GID)"
 	@echo "[USERNAME]: $(USERNAME)"
+
