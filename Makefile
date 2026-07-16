@@ -6,7 +6,9 @@ HOST_GID := $(shell id -g)
 
 
 MOUNTPOINT := /proj/cad
-SSH_HOST := ebw220000@giant.utdallas.edu
+SSH_USER := ebw220000
+SSH_SERVER := giant.utdallas.edu
+SSH_HOST := $(SSH_USER)@$(SSH_SERVER)
 REMOTE :=  $(SSH_HOST):/proj/cad
 
 .PHONY: help build check-ssh do-mount mount unmount run debug
@@ -21,24 +23,27 @@ build: # Build the docker image
 mount: check-ssh do-mount # Mount the CAD tool directory
 
 check-ssh:
-	@echo "Checking SSH connectivity to $(SSH_HOST)..."
-	@ssh -o ConnectTimeout=10 $(SSH_HOST) exit || \
-		{ echo "[ERROR]: Cannot connect to $(SSH_HOST), check your lab network or VPN connection."; \
-		  exit 1; }
+	@echo "[INFO]: Checking SSH connectivity to $(SSH_SERVER)..."
+	@nc -z -w 3 $(SSH_SERVER) 22 || { \
+		echo "[ERROR]: Cannot reach $(SSH_SERVER) on port 22. Please check connection to network or VPN"; \
+		exit 1; \
+	}
+	@echo "[SUCCESS]: $(SSH_HOST):22 is reachable."
+
 
 do-mount:
 	@sudo mkdir -p $(MOUNTPOINT); \
 	if mountpoint -q $(MOUNTPOINT) && \
 	   timeout 5 ls $(MOUNTPOINT) >/dev/null 2>&1; then \
-		echo "$(MOUNTPOINT) is already mounted and responsive."; \
+		 echo "[INFO]: $(MOUNTPOINT) is already mounted and responsive."; \
 		exit 0; \
 	fi; \
 	if mountpoint -q $(MOUNTPOINT); then \
-		echo "$(MOUNTPOINT) appears stale. Unmounting..."; \
+	echo "[INFO]: $(MOUNTPOINT) appears stale. Unmounting..."; \
 		sudo umount -f $(MOUNTPOINT) 2>/dev/null || true; \
 	fi; \
-	@echo "Mounting $(REMOTE) at $(MOUNTPOINT)..." \
-	@sudo sshfs $(REMOTE) $(MOUNTPOINT) \
+	echo "[INFO]: Mounting $(REMOTE) at $(MOUNTPOINT)..."; \
+	sudo sshfs $(REMOTE) $(MOUNTPOINT) \
 		-o ro \
 		-o allow_other \
 		-o default_permissions \
@@ -50,7 +55,7 @@ do-mount:
 		-o attr_timeout=3600 \
 		-o entry_timeout=3600 \
 		-o negative_timeout=60 \
-		-o compression=no
+		-o compression=yes
 
 
 
