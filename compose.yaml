@@ -29,6 +29,7 @@ services:
   quartus:
     container_name: quartus
     image: alterafpga/quartus-pro:26.1-agilex7
+    pull_policy: weekly
     user: "${HOST_UID}:${HOST_GID}"
     working_dir: /workspace
     volumes:
