@@ -30,8 +30,11 @@ services:
     container_name: quartus
     image: alterafpga/quartus-pro:26.1-agilex7
     pull_policy: weekly
+    environment: 
+      - LM_LICENSE_FILE=${LM_LICENSE_FILE}
+    network_mode: "host"
     user: "${HOST_UID}:${HOST_GID}"
-    working_dir: /workspace
+    working_dir: /data
     volumes:
-      - ${HOME}/OpenLab:/workspace
+      - ${HOME}/OpenLab:/data # By default Quartus images use /data as target
 
