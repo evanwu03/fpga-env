@@ -1,10 +1,12 @@
 services:
   fpga-dev:
+    container_name: fpga-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: fpga-dev:latest
-
     user: "${HOST_UID}:${HOST_GID}"
     working_dir: /home/ubuntu
-
     stdin_open: true
     tty: true
 
@@ -25,7 +27,9 @@ services:
       - /proj/cad:/proj/cad:ro
 
   quartus:
-    image: alterafpga/quartus-pro:26.1-agilex
+    container_name: quartus
+    image: alterafpga/quartus-pro:26.1-agilex7
+    user: "${HOST_UID}:${HOST_GID}"
     working_dir: /workspace
     volumes:
       - ${HOME}/OpenLab:/workspace
