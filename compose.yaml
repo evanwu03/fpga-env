@@ -1,0 +1,32 @@
+services:
+  fpga-dev:
+    image: fpga-dev:latest
+
+    user: "${HOST_UID}:${HOST_GID}"
+    working_dir: /home/ubuntu
+
+    stdin_open: true
+    tty: true
+
+    volumes:
+      # Neovim configuration/state
+      - ${HOME}/.config/nvim:/home/ubuntu/.config/nvim
+      - ${HOME}/.local/share/nvim:/home/ubuntu/.local/share/nvim
+      - ${HOME}/.local/state/nvim:/home/ubuntu/.local/state/nvim
+
+      # UVM
+      - /opt/uvm/1800.2-2020.3.1/src:/opt/uvm/1800.2-2020.3.1/src:ro
+      - ${HOME}/projects/FPGA_Projects/UVMA_1_2_6:/home/ubuntu/UVM_1_2_6
+
+      # Projects
+      - ${HOME}/OpenLab:/home/ubuntu/OpenLab
+
+      # Remote CAD filesystem mounted by host
+      - /proj/cad:/proj/cad:ro
+
+  quartus:
+    image: alterafpga/quartus-pro:26.1-agilex
+    working_dir: /workspace
+    volumes:
+      - ${HOME}/OpenLab:/workspace
+
