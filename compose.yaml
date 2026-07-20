@@ -37,4 +37,5 @@ services:
     working_dir: /data
     volumes:
       - ${HOME}/OpenLab/fpga/:/data # By default Quartus images use /data as target
+      - ${HOME}/.license/:/${HOME}/.license/ # This project assumes quartus license is stored at .license. Change this according to your needs
 
