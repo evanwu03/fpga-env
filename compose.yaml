@@ -36,5 +36,5 @@ services:
     user: "${HOST_UID}:${HOST_GID}"
     working_dir: /data
     volumes:
-      - ${HOME}/OpenLab:/data # By default Quartus images use /data as target
+      - ${HOME}/OpenLab/fpga/:/data # By default Quartus images use /data as target
 
