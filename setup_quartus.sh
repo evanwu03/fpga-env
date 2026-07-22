@@ -28,6 +28,7 @@ export QUARTUS_ROOTDIR="$ALTERA_ROOT/quartus"
 export QSYS_ROOTDIR="$ALTERA_ROOT/qsys/bin"
 
 export PATH="$QUARTUS_ROOTDIR/bin:$QSYS_ROOTDIR/bin:$PATH"
+export PATH="$ALTERA_ROOT/syscon/bin/:$PATH"
 
 # Print out new environment configurations
 echo "Using Quartus Prime Pro $1"
