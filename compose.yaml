@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     image: fpga-dev:latest
+    environment:
+      - QUARTUS_ROOTDIR=${QUARTUS_ROOTDIR} 
     user: "${HOST_UID}:${HOST_GID}"
     working_dir: /home/ubuntu
     stdin_open: true
@@ -25,6 +27,10 @@ services:
 
       # Remote CAD filesystem mounted by host
       - /proj/cad:/proj/cad:ro
+
+      # Quartus Prime Pro installation directory 
+      - ${ALTERA_ROOT}:${ALTERA_ROOT}
+
 
   quartus:
     container_name: quartus

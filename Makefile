@@ -43,7 +43,7 @@ do-mount:
 		sudo umount -f $(MOUNTPOINT) 2>/dev/null || true; \
 	fi; \
 	echo "[INFO]: Mounting $(REMOTE) at $(MOUNTPOINT)..."; \
-	sudo sshfs $(REMOTE) $(MOUNTPOINT) \
+	sudo sshfs -o ssh_command="ssh -vvv" $(REMOTE) $(MOUNTPOINT) \
 		-o ro \
 		-o allow_other \
 		-o default_permissions \
