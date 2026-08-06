@@ -7,6 +7,7 @@ services:
     image: fpga-dev:latest
     environment:
       - QUARTUS_ROOTDIR=${QUARTUS_ROOTDIR} 
+      - DISPLAY=${DISPLAY}
     user: "${HOST_UID}:${HOST_GID}"
     working_dir: /home/ubuntu
     stdin_open: true
@@ -30,6 +31,9 @@ services:
 
       # Quartus Prime Pro installation directory 
       - ${ALTERA_ROOT}:${ALTERA_ROOT}
+
+      # X11 unix socket for display forwarding
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
 
 
   quartus:

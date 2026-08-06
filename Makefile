@@ -43,7 +43,7 @@ do-mount:
 		sudo umount -f $(MOUNTPOINT) 2>/dev/null || true; \
 	fi; \
 	echo "[INFO]: Mounting $(REMOTE) at $(MOUNTPOINT)..."; \
-	sudo sshfs -o ssh_command="ssh -vvv" $(REMOTE) $(MOUNTPOINT) \
+	sudo sshfs -o ssh_command="ssh -X -vvv" $(REMOTE) $(MOUNTPOINT) \
 		-o ro \
 		-o allow_other \
 		-o default_permissions \
@@ -60,7 +60,7 @@ do-mount:
 
 
 unmount: # Unmounts existing filesystem located at MOUNTPOINT 
-	sudo umount -f $(MOUNTPOINT) 2>/dev/null || true
+	sudo umount -l $(MOUNTPOINT) 2>/dev/null || true
 
 
 dev: # Enters an interactive shell in fpga-dev container
