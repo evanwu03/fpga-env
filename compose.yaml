@@ -30,7 +30,7 @@ services:
       - /proj/cad:/proj/cad:ro
 
       # Quartus Prime Pro installation directory 
-      - ${ALTERA_ROOT}:${ALTERA_ROOT}
+      # - ${ALTERA_ROOT}:${ALTERA_ROOT}
 
       # X11 unix socket for display forwarding
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
