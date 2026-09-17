@@ -13,8 +13,11 @@ case "$1" in
 26.1)
   ALTERA_ROOT="$HOME/altera_pro/26.1"
   ;;
+lite)
+  ALTERA_ROOT="$HOME/altera_lite/25.1std"
+  ;;
 *)
-  echo "Usage: source ${BASH_SOURCE[0]} {24.1|26.1}"
+  echo "Usage: source ${BASH_SOURCE[0]} {24.1|26.1|lite}"
   return 1
   ;;
 esac
@@ -31,6 +34,6 @@ export PATH="$QUARTUS_ROOTDIR/bin:$QSYS_ROOTDIR/bin:$PATH"
 export PATH="$ALTERA_ROOT/syscon/bin/:$PATH"
 
 # Print out new environment configurations
-echo "Using Quartus Prime Pro $1"
+echo "Using Quartus Prime Pro/Lite $1"
 echo "QUARTUS_ROOTDIR=$QUARTUS_ROOTDIR"
 echo "QSYS_ROOTDIR=$QSYS_ROOTDIR"
