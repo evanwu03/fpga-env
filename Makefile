@@ -55,7 +55,8 @@ do-mount:
 		-o attr_timeout=3600 \
 		-o entry_timeout=3600 \
 		-o negative_timeout=60 \
-		-o compression=yes
+		-o compression=yes \
+	  -o no_contain_symlinks
 
 
 
