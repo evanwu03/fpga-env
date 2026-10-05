@@ -56,7 +56,7 @@ do-mount:
 		-o entry_timeout=3600 \
 		-o negative_timeout=60 \
 		-o compression=yes \
-	  -o no_contain_symlinks
+	  #-o no_contain_symlinks // Enable this option on newer versions of sshfs
 
 
 
